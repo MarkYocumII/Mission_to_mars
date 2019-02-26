@@ -100,6 +100,7 @@ def scrape_info():
 
     #convert dataframe to html string
     mars_html_table = mars_facts_df.to_html()
+    mars_html_table = mars_html_table.replace('\n', '')
     print(mars_html_table)
 
     #ASGS scrape
@@ -121,8 +122,8 @@ def scrape_info():
     hemisphere_image_urls = []
 
     for i in range(0, len(usgs_results)):
-        #find title via h3 header, strip out word "Enhanced"
-        title = usgs_results[i].find('h3').text.strip("Enhanced")
+        #find title via h3 header
+        title = usgs_results[i].find('h3').text
             
         #find image url - locate enhanced image url and open new browser
         image_url = usgs_results[i].a["href"]
@@ -139,7 +140,7 @@ def scrape_info():
         img_url = sample_results[0].a["href"]
 
         #add title and image url to dictionary
-        dict_img = {"title": title, "img url": img_url}
+        dict_img = {"title": title, "img_url": img_url}
         hemisphere_image_urls.append(dict_img)
     
     print(hemisphere_image_urls)

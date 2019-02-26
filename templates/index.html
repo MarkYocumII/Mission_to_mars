@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mars Data</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,8 +16,60 @@
             <h1>Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
-        <img src="{{ mars.featured_img_url }}" alt="Mars Featured Image">
+        <h1><strong>Latest Mars News</strong></h1>
+        <h3><strong>{{ mars.news_title }}</strong></h3>
+        <p><strong>{{ mars.news_p }}</strong></p>
+
     </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8" style="margin-bottom: 40px;">
+                <h1><strong>Mars Featured Image</strong></h1>
+                <img src="{{ mars.featured_img_url }}" alt="Mars Featured Image" style="max-width:100%;">
+            </div>
+            <div class="col-lg-3"
+                style="border:1px solid gray; margin-right: 5px; margin-bottom: 20px; border-radius: 3%">
+                <h3>Current Weather on Mars</h3>
+                <p>{{ mars.mars_weather }}</p>
+            </div>
+            <div class="col-lg-3" style="border:1px solid gray; margin-right: 5px; border-radius: 3%">
+                <h3>Mars Facts</h3>
+
+                {{ mars.mars_html_table }}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <h2>Mars Hemispheres</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for image in mars.hemisphere_img_list %}
+            <div class="col-md-6">
+
+                <img src="{{ image.img_url }}" alt="Mars Featured Image"
+                    style="max-width:100%; border: 1px solid gray; padding: 3px;">
+
+                <div class="container" >
+                    <h2>{{  image.title }}</h2>
+                </div>
+            </div>
+
+            <!-- <li style="color:blue">{{ image.title }}</li> -->
+            {% endfor %}
+
+        </div>
+    </div>
+
+    </div>
+
+
+
+
 </body>
 
 </html>
